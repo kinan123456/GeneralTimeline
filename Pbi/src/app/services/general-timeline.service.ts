@@ -6,7 +6,7 @@ import { RecordModel } from '../models/record.model';
 @Injectable({
 	providedIn: 'root'
 })
-export class ChartService {
+export class GeneralTimelineService {
 	private readonly differenceYHeights: number
 	private readonly dragOptions: {};
 	private yMaxValues: Map<number, number>;

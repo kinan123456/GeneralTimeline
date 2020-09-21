@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import * as Chart from 'chart.js';
 import { BackendModel } from 'src/app/models/backend.model';
 import { BackendService } from 'src/app/services/backend.service';
-import { ChartService } from 'src/app/services/chart.service';
+import { GeneralTimelineService } from 'src/app/services/general-timeline.service';
 
 @Component({
 	selector: 'app-general-timeline',
@@ -34,7 +34,7 @@ export class GeneralTimelineComponent implements OnInit, OnDestroy {
 	 * @param chartService Injectable service from root to be able to use its functions.
 	 */
 	constructor(private backendService: BackendService,
-		private chartService: ChartService) {
+		private chartService: GeneralTimelineService) {
 
 		this.subscription = new Subscription();
 		this.chartDataSets = [];

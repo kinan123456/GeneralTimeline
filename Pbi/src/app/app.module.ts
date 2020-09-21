@@ -6,11 +6,15 @@ import { AppComponent } from './app.component';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
 import { GeneralTimelineComponent } from './components/general-timeline/general-timeline.component';
+import { MrrViewComponent } from './components/mrr-view/mrr-view.component';
+import { TrajectoryComponent } from './components/trajectory/trajectory.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GeneralTimelineComponent,
+    MrrViewComponent,
+    TrajectoryComponent,
   ],
   imports: [
     BrowserModule,
