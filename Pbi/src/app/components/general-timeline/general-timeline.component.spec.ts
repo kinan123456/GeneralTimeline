@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MyBarChartComponent } from './my-bar-chart.component';
+import { GeneralTimelineComponent } from './general-timeline.component';
 
 describe('MyBarChartComponent', () => {
-  let component: MyBarChartComponent;
-  let fixture: ComponentFixture<MyBarChartComponent>;
+  let component: GeneralTimelineComponent;
+  let fixture: ComponentFixture<GeneralTimelineComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MyBarChartComponent ]
+      declarations: [ GeneralTimelineComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MyBarChartComponent);
+    fixture = TestBed.createComponent(GeneralTimelineComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

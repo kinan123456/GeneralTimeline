@@ -1,18 +1,18 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { BackendService } from '../services/backend.service';
 import 'chartjs-plugin-zoom';
-import { BackendModel } from '../models/backend.model';
 import { ChartDataSets, ChartLegendLabelItem, ChartOptions, ChartType } from 'chart.js';
 import { Subscription } from 'rxjs';
-import { ChartService } from '../services/chart.service';
 import * as Chart from 'chart.js';
+import { BackendModel } from 'src/app/models/backend.model';
+import { BackendService } from 'src/app/services/backend.service';
+import { ChartService } from 'src/app/services/chart.service';
 
 @Component({
-	selector: 'app-my-bar-chart',
-	templateUrl: './my-bar-chart.component.html',
-	styleUrls: ['./my-bar-chart.component.css']
+	selector: 'app-general-timeline',
+	templateUrl: './general-timeline.component.html',
+	styleUrls: ['./general-timeline.component.css']
 })
-export class MyBarChartComponent implements OnInit, OnDestroy {
+export class GeneralTimelineComponent implements OnInit, OnDestroy {
 	private readonly subscription: Subscription;
 	private readonly chartDataPointRadius: number;
 	private readonly chartDataPointHeight: number;
