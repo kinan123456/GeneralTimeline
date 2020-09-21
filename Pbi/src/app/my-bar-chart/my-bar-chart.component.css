@@ -1,0 +1,45 @@
+.chart {
+    display: block;
+    background-color: aliceblue;
+    border-radius: 6px;
+}
+
+.btn{
+    margin: 5px;
+}
+
+.input {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+} 
+body {
+    background: #20262E;
+    padding: 20px;
+    font-family: Helvetica;
+}
+
+#container {
+    background-color: white;
+    border-radius: 4px;
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 15px;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+}
+  
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+  
+tr:nth-child(even){background-color: #f2f2f2}
+  
+th {
+    background-color: #4CAF50;
+    color: white;
+}

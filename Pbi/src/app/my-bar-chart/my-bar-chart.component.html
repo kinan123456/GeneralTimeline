@@ -1,0 +1,43 @@
+<div id="container">
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Action</th>
+		</tr>
+		<tr>
+			<td>Reset View</td>
+			<td>Re-loads view.<br /> Display all elements at initial zoom.</td>
+			<td><button class="btn btn-primary" (click)="resetChartView()">Reset Chart View</button></td>
+		</tr>
+		<tr>
+			<td>Data hide</td>
+			<td>Hides/unhides all elements</td>
+			<td><button class="btn btn-primary" (click)="deselectMrrView()">{{mrrSelectButtonText}}</button></td>
+		</tr>
+		<tr>
+			<td>Chart Mouse Mode</td>
+			<td>Zoom in/out & Pan in all sides.<br/>Select desired section.</td>
+			<td class="input">
+				<div>
+					<input id="zoomPan" type="radio" name="mode" (change)="changeMode()"
+						[checked]="!sectionSelectorChecked">
+					<label class="custom-control-label" for="zoomPan">Zoom & Pan</label>
+				</div>
+				<div>
+					<input id="drag" type="radio" name="mode" (change)="changeMode()" [checked]="sectionSelectorChecked">
+					<label for="drag">Section Selector</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Active Elements</td>
+			<td>Total non-hidden elements displayed on chart.</td>
+			<td><label style="color: blue;">Count: {{activeElements}}</label></td>
+		</tr>
+	</table>
+
+	<div class="chart" id="visuals">
+		<canvas id="canvas" #canvas></canvas>
+	</div>
+</div>
