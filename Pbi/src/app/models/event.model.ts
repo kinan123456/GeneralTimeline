@@ -1,7 +1,7 @@
 /**
  * Data interface displayed on General Timeline.
  */
-export interface RecordModel {
+export interface EventModel {
     // Related MRR identifier.
     mrrId: number;
     // Name of the event.

@@ -3,9 +3,10 @@ import 'chartjs-plugin-zoom';
 import { ChartDataSets, ChartLegendLabelItem, ChartOptions, ChartType } from 'chart.js';
 import { Subscription } from 'rxjs';
 import * as Chart from 'chart.js';
-import { BackendModel } from 'src/app/models/backend.model';
+import { TimelineModel } from 'src/app/models/timeline.model';
 import { BackendService } from 'src/app/services/backend.service';
 import { GeneralTimelineService } from 'src/app/services/general-timeline.service';
+import { ChartCreatorService } from 'src/app/services/chart-creator.service';
 
 @Component({
 	selector: 'app-general-timeline',
@@ -22,7 +23,7 @@ export class GeneralTimelineComponent implements OnInit, OnDestroy {
 	private chartOptions: ChartOptions;
 	private chart: Chart;
 	private isChartDataHidden: boolean;
-	private executionInfo: BackendModel;
+	private executionInfo: TimelineModel;
 	sectionSelectorChecked: boolean;
 	mrrSelectButtonText: string;
 	activeElements: number;
@@ -34,7 +35,8 @@ export class GeneralTimelineComponent implements OnInit, OnDestroy {
 	 * @param chartService Injectable service from root to be able to use its functions.
 	 */
 	constructor(private backendService: BackendService,
-		private chartService: GeneralTimelineService) {
+		private chartService: GeneralTimelineService,
+		private chartCreatorService: ChartCreatorService) {
 
 		this.subscription = new Subscription();
 		this.chartDataSets = [];
@@ -58,7 +60,7 @@ export class GeneralTimelineComponent implements OnInit, OnDestroy {
 	 */
 	private subscribeToBackendData(): void {
 		// Add child subscription.
-		this.subscription.add(this.backendService.getRemoteData.subscribe((data: BackendModel) => {
+		this.subscription.add(this.backendService.getRemoteData.subscribe((data: TimelineModel) => {
 			this.executionInfo = data;
 			this.setupChartDatasets();
 			this.setupChartOptions();
@@ -232,7 +234,7 @@ export class GeneralTimelineComponent implements OnInit, OnDestroy {
 	private initializeChart(): void {
 		const ctx = this.canvas.nativeElement.getContext('2d');
 
-		this.chart = this.chartService.createChartInstance(ctx,
+		this.chart = this.chartCreatorService.createChartInstance(ctx,
 			this.chartType,
 			this.chartOptions,
 			this.chartDataSets);

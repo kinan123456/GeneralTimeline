@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Chart, ChartArea, ChartData, ChartDataSets, ChartOptions, ChartPoint, ChartTooltipItem } from 'chart.js';
-import { BackendModel } from '../models/backend.model';
-import { RecordModel } from '../models/record.model';
+import { TimelineModel } from '../models/timeline.model';
+import { EventModel } from '../models/event.model';
 
 @Injectable({
 	providedIn: 'root'
@@ -43,27 +43,6 @@ export class GeneralTimelineService {
 	}
 
 	/**
-	 * Creates and returns chart instance given its configurations.
-	 * @param ctx Canvas where the chart rendering on.
-	 * @param chartType Type of the chart
-	 * @param chartOptions Chart options
-	 * @param chartDataSets Chart data
-	 */
-	public createChartInstance(ctx: CanvasRenderingContext2D,
-		chartType: string,
-		chartOptions: ChartOptions,
-		chartDataSets: ChartDataSets[]): Chart {
-
-		return new Chart(ctx, {
-			type: chartType,
-			options: chartOptions,
-			data: {
-				datasets: chartDataSets,
-			}
-		});
-	}
-
-	/**
 	 * On mouse hover returns the name of the item and its X-axis value.
 	 * @param tooltipItem Item the mouse pointing on
 	 * @param data All chart data.
@@ -97,7 +76,7 @@ export class GeneralTimelineService {
 	 * @param chartArea Chart area
 	 * @param executionInfo Backend data
 	 */
-	public onClickChartElement(event: MouseEvent, chartArea: ChartArea, executionInfo: BackendModel): void {
+	public onClickChartElement(event: MouseEvent, chartArea: ChartArea, executionInfo: TimelineModel): void {
 		const { left, right, top, bottom } = chartArea;
 		if (
 			event.offsetX > left &&
@@ -182,12 +161,12 @@ export class GeneralTimelineService {
 	 * user can see all data rather than overlapping.
 	 * @param recordsList Record models array with the same name property value.
 	 */
-	public getDatasetOfKey(recordsList: RecordModel[],
+	public getDatasetOfKey(recordsList: EventModel[],
 		initialChartPointHeight: number,
 		pointRadius: number): ChartPoint[] {
-			
+
 		let datasets: ChartPoint[] = [];
-		recordsList.forEach((record: RecordModel) => {
+		recordsList.forEach((record: EventModel) => {
 			this.updateMaxHeightOfXLabel(record.occurrenceTime, initialChartPointHeight);
 			datasets.push({
 				x: record.occurrenceTime,
@@ -208,17 +187,17 @@ export class GeneralTimelineService {
 	 */
 	private displayRecordModelByChartData(clickedElementName: string,
 		clickedElementXLabel: string,
-		executionInfo: BackendModel): void {
+		executionInfo: TimelineModel): void {
 
 		// Each label has its name appended with "(#X)" to describe total active count keys on graph.
 		// Filter last string to get the item name only without any additional information. 
 		let filteredElementName = this.getStringTillCharacter(clickedElementName);
 
 		// Get records that has same name of 'filteredElementName'.
-		let recordsWithSameName = executionInfo.records.filter((record: RecordModel) => record.name === filteredElementName);
+		let recordsWithSameName = executionInfo.records.filter((record: EventModel) => record.name === filteredElementName);
 		// Get records that has same x-axis value (same date).
 		let matchingRecords = recordsWithSameName.filter(
-			(record: RecordModel) => clickedElementXLabel === record.occurrenceTime.toLocaleString()
+			(record: EventModel) => clickedElementXLabel === record.occurrenceTime.toLocaleString()
 		);
 
 		// Display record model that represents the chart element.

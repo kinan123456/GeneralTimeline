@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { GeneralTimelineComponent } from './components/general-timeline/general-timeline.component';
 import { MrrViewComponent } from './components/mrr-view/mrr-view.component';
 import { TrajectoryComponent } from './components/trajectory/trajectory.component';
+import { MrrGraphComponent } from './components/mrr-view/mrr-graph/mrr-graph.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { TrajectoryComponent } from './components/trajectory/trajectory.componen
     GeneralTimelineComponent,
     MrrViewComponent,
     TrajectoryComponent,
+    MrrGraphComponent,
   ],
   imports: [
     BrowserModule,
