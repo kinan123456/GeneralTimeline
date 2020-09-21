@@ -1,14 +1,16 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ChartCreatorService } from 'src/app/services/chart-creator.service';
+import { ChartDataSets, ChartOptions, Chart } from 'chart.js';
 
 @Component({
-	selector: 'app-mrr-graph',
+	selector: 'mrr-graph',
 	templateUrl: './mrr-graph.component.html',
 	styleUrls: ['./mrr-graph.component.css']
 })
 export class MrrGraphComponent implements OnInit {
 	@ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
 	private chart: Chart;
+	@Input() mrrGraphData: ChartDataSets[];
 
 	constructor(private chartCreatorService: ChartCreatorService) { }
 
@@ -28,48 +30,10 @@ export class MrrGraphComponent implements OnInit {
 						type: 'linear',
 						position: 'bottom'
 					}]
-				}
+				},
 			},
-			[{
-				label: 'Scatter Dataset',
-				data: [{
-					x: -10,
-					y: 0
-				}, {
-					x: 0,
-					y: 10
-				}, {
-					x: 10,
-					y: 5
-				}]
-			}]
+			this.mrrGraphData
 		);
 	}
 
 }
-
-
-
-/**
- * var scatterChart = new Chart(ctx, {
-	type: 'scatter',
-	data: {
-		datasets: [{
-			label: 'Scatter Dataset',
-			data: [{
-				x: -10,
-				y: 0
-			}, {
-				x: 0,
-				y: 10
-			}, {
-				x: 10,
-				y: 5
-			}]
-		}]
-	},
-	options:
-	}
-});
- *
- */

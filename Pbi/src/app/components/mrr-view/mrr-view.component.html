@@ -1,1 +1,7 @@
-<p>mrr-view works!</p>
+<div class="col-10" *ngIf="mrrGraphData.length > 0; else emptyGraphData">
+    <mrr-graph [mrrGraphData]="mrrGraphData"></mrr-graph>
+</div>
+
+<ng-template #emptyGraphData>
+    <span>ERROR</span>
+</ng-template>

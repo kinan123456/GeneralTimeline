@@ -3,3 +3,12 @@
     background-color: aliceblue;
     border-radius: 6px;
 }
+
+#container {
+    background-color: white;
+    border-radius: 4px;
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 15px;
+    text-align: center;
+}

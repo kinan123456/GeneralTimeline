@@ -32,10 +32,10 @@ export class GeneralTimelineComponent implements OnInit, OnDestroy {
 	/**
 	 * Initializes field values.
 	 * @param backendService Injectable service from root to be able to use its functions.
-	 * @param chartService Injectable service from root to be able to use its functions.
+	 * @param generalTimelineService Injectable service from root to be able to use its functions.
 	 */
 	constructor(private backendService: BackendService,
-		private chartService: GeneralTimelineService,
+		private generalTimelineService: GeneralTimelineService,
 		private chartCreatorService: ChartCreatorService) {
 
 		this.subscription = new Subscription();
@@ -93,7 +93,7 @@ export class GeneralTimelineComponent implements OnInit, OnDestroy {
 			scales: {},
 			// Implement 'onClick' mouse event (or touch event) method.
 			onClick: (event: MouseEvent) =>
-				this.chartService.onClickChartElement(event, this.chart.chartArea, this.executionInfo),
+				this.generalTimelineService.onClickChartElement(event, this.chart.chartArea, this.executionInfo),
 			legend: {
 				display: true,
 				position: 'bottom',
@@ -112,8 +112,8 @@ export class GeneralTimelineComponent implements OnInit, OnDestroy {
 			},
 			plugins: {
 				zoom: {
-					pan: this.chartService.getInitialPanOptions,
-					zoom: this.chartService.getInitialZoomOptions
+					pan: this.generalTimelineService.getInitialPanOptions,
+					zoom: this.generalTimelineService.getInitialZoomOptions
 				}
 			}
 		};
@@ -122,7 +122,7 @@ export class GeneralTimelineComponent implements OnInit, OnDestroy {
 	}
 
 	private updateActiveElementsCount() {
-		this.activeElements = this.chartService.getAvailableElementsCount(this.chart);
+		this.activeElements = this.generalTimelineService.getAvailableElementsCount(this.chart);
 	}
 
 	/**
@@ -141,7 +141,7 @@ export class GeneralTimelineComponent implements OnInit, OnDestroy {
 
 		let rangeMax = {
 			x: this.executionInfo.endTime,
-			y: this.chartService.getHighestYElement() + this.chartDataPointHeight
+			y: this.generalTimelineService.getHighestYElement() + this.chartDataPointHeight
 		};
 
 		chartOptionsPluginInstance.zoom.rangeMin = rangeMin;
@@ -159,7 +159,7 @@ export class GeneralTimelineComponent implements OnInit, OnDestroy {
 			display: false,
 			ticks: {
 				min: 0,
-				max: this.chartService.getHighestYElement() + this.chartDataPointHeight
+				max: this.generalTimelineService.getHighestYElement() + this.chartDataPointHeight
 			}
 		}];
 	}
@@ -172,7 +172,7 @@ export class GeneralTimelineComponent implements OnInit, OnDestroy {
 			enabled: true,
 			callbacks: {
 				label: (tooltipItem: Chart.ChartTooltipItem, data: Chart.ChartData) => {
-					return this.chartService.getChartTooltipLabelCallback(tooltipItem, data);
+					return this.generalTimelineService.getChartTooltipLabelCallback(tooltipItem, data);
 				}
 			},
 		};
@@ -212,18 +212,18 @@ export class GeneralTimelineComponent implements OnInit, OnDestroy {
 	 * This will prevent duplicating legend label names that are displayed near graph.
 	 */
 	private setupChartDatasets(): void {
-		const newArray = this.chartService.groupBy(this.executionInfo.records, 'name');
+		const newArray = this.generalTimelineService.groupBy(this.executionInfo.records, 'name');
 
 		Object.entries(newArray).forEach(([key, values]) => {
 			// Loads backend records (event name, occurrence time) into chart, each as separated dataset.
 			this.chartDataSets.push({
 				// Get all dataset of the same key (name).
-				data: this.chartService.getDatasetOfKey(values,
+				data: this.generalTimelineService.getDatasetOfKey(values,
 					this.chartDataPointHeight,
 					this.chartDataPointRadius),
 				// Prints key name and the count of it on graph.
 				label: `${key} (#${values.length})`,
-				backgroundColor: this.chartService.getRandomColor,
+				backgroundColor: this.generalTimelineService.getRandomColor,
 			});
 		});
 	}
@@ -249,7 +249,7 @@ export class GeneralTimelineComponent implements OnInit, OnDestroy {
 		this.sectionSelectorChecked = !this.sectionSelectorChecked;
 		const panOptions = this.chart.options.plugins.zoom.pan;
 		const zoomOptions = this.chart.options.plugins.zoom.zoom;
-		zoomOptions.drag = zoomOptions.drag ? false : this.chartService.getDragOptions;
+		zoomOptions.drag = zoomOptions.drag ? false : this.generalTimelineService.getDragOptions;
 		panOptions.enabled = !zoomOptions.drag;
 		this.chart.update();
 	}
