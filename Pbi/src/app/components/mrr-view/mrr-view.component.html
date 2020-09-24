@@ -1,3 +1,12 @@
+<div>
+    <!-- TODO: view current time, remove 'disabled' let user input text to set time-->
+    <!-- TODO: ngModel binding -->
+    <input type="text" placeholder="Time" disabled/>
+    
+    <button class="btn btn-primary" (click)="moveMrr(1)">Next MRR</button>
+    <button class="btn btn-primary" (click)="moveMrr(-1)">Previous MRR</button>
+</div>
+
 <div class="col-10" *ngIf="mrrGraphData.length > 0; else emptyGraphData">
     <mrr-graph [mrrGraphData]="mrrGraphData"></mrr-graph>
 </div>
