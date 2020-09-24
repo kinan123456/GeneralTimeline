@@ -1,1 +1,7 @@
-<p>trajectory works!</p>
+<div class="chart-container" style="position: relative; height: 90vh; width: 80vw; justify-content: center;">
+    <canvas baseChart [datasets]="chartData" [options]="chartOptions" [legend]="chartLegend" [chartType]="chartType"></canvas>
+</div>
+<div class="container col-10">
+    <label for="customRange1">time</label>
+    <input min="111" max="113" value="111" type="range" class="custom-range" id="timeSlider">
+</div>
