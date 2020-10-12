@@ -42,7 +42,7 @@ export class GeneralTimelineComponent implements OnInit, OnDestroy {
 		this.chartDataSets = [];
 		this.chartType = 'bubble';
 		this.chartDataPointRadius = 5;
-		this.chartDataPointHeight = 0.2;
+		this.chartDataPointHeight = 1;
 		this.sectionSelectorChecked = true;
 		this.isChartDataHidden = false;
 		this.mrrSelectButtonText = 'Deselect All Mrrs';

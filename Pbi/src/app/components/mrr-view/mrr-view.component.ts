@@ -3,6 +3,7 @@ import { ChartDataSets } from 'chart.js';
 import { CoordinatesModel } from 'src/app/models/coordinates.model';
 import { MrrModel } from 'src/app/models/mrr.model';
 import { BackendService } from 'src/app/services/backend.service';
+import { ImageService } from 'src/app/services/image.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -13,10 +14,20 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class MrrViewComponent implements OnInit {
 	private currentMrrTime: Date;
 	private mrrData: MrrModel;
+	private readonly mImage: string;
+	private readonly eImage: string;
+	private readonly sImage: string;
+	private readonly imageWidth: number;
+	private readonly imageHeight: number;
 	mrrGraphData: ChartDataSets[];
 
-	constructor(private backendService: BackendService, private utilsService: UtilsService) {
+	constructor(private backendService: BackendService, private imageService: ImageService) {
 		this.mrrData = this.backendService.requestMrrData;
+		this.mImage = 'assets/images/m.png';
+		this.eImage = 'assets/images/e.png';
+		this.sImage = 'assets/images/s.png';
+		this.imageHeight = 30;
+		this.imageWidth = 30;
 		// TODO: Make sure that map entries are sorted so next and previous buttons work correctly
 	}
 
@@ -56,17 +67,25 @@ export class MrrViewComponent implements OnInit {
 		return [{
 			label: 'M',
 			backgroundColor: 'red',
-			radius: 30,
+			radius: 20,
 			data: currentWorldData[0].map(coordinate => {
 				return { x: coordinate.X, y: coordinate.Y }
-			})
+			}),
+			// pointStyle: this.imageService.createImage(this.imageWidth, this.imageHeight, this.mImage)
 		}, {
 			label: 'E',
 			backgroundColor: 'yellow',
-			radius: 30,
+			radius: 20,
 			data: currentWorldData[1].map(coordinate => {
 				return { x: coordinate.X, y: coordinate.Y }
-			})
+			}),
+			// pointStyle: this.imageService.createImage(this.imageWidth, this.imageHeight, this.eImage),
+		}, {
+			label: 'S',
+			backgroundColor: 'blue',
+			radius: 30,
+			data: [{x: 0, y: 0}],
+			// pointStyle: this.imageService.createImage(this.imageWidth * 3, this.imageHeight * 3, this.sImage),
 		}];
 	}
 

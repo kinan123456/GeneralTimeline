@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChange, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChange, ViewChild } from '@angular/core';
 import { ChartCreatorService } from 'src/app/services/chart-creator.service';
-import { ChartDataSets, ChartOptions, Chart } from 'chart.js';
+import { ChartDataSets } from 'chart.js';
 
 @Component({
 	selector: 'mrr-graph',
