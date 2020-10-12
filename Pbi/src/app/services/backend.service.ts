@@ -4,6 +4,8 @@ import { TimelineModel } from '../models/timeline.model';
 import { EventModel } from '../models/event.model';
 import { MrrModel } from '../models/mrr.model';
 import { CoordinatesModel } from '../models/coordinates.model';
+import { TrajectoryModel } from '../models/trajectory.model';
+import * as trajectory from '../files/good.json';
 
 @Injectable({
 	providedIn: 'root'
@@ -111,6 +113,10 @@ export class BackendService {
 			endTime: new Date(),
 			worldData: worldData
 		}
+	}
+
+	public get requestTrajectoryData() : TrajectoryModel[] {
+		return trajectory.default;
 	}
 
 	private setupTimelineModel(): void {
